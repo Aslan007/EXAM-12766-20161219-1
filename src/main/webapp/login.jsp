@@ -4,12 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Login</title>
 </head>
 <body>
 <center>
-<h1><a href="login.jsp">login</a><br></h1>
-<h1><a href="crud/add.jsp">add</a><br></h1>
+<form action="UserServlet" method="post">
+<p>username:<input type="text" name="name"></p>
+<p><input type="hidden" name="submitFlag" value="userLogin"></p>
+<input type="submit" value="submit">
+<input type="reset" value="reset">
+</form>
 </center>
 </body>
 </html>

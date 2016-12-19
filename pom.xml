@@ -14,7 +14,32 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    
+      <!-- 连接MySQL数据库需要的jar包 -->  
+        <dependency>  
+            <groupId>mysql</groupId>  
+            <artifactId>mysql-connector-java</artifactId>  
+            <version>5.1.38</version>  
+        </dependency>  
+        
+        <!-- 导入java ee jar 包 -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+		</dependency>
+		
+		<!-- JSTL标签类 -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+        
+        
+    
   </dependencies>
+  
   <build>
     <finalName>Exam-12766-20161219-1</finalName>
   </build>
