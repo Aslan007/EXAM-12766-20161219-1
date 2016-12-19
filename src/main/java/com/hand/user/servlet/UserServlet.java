@@ -98,13 +98,19 @@ public class UserServlet extends HttpServlet {
 	private void toDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String str = request.getParameter("film_id");
 		int film_id = Integer.parseInt(str);
-		
 		Film film = new Film();
 		
 		film.setFilmId(film_id);
 		FilmDaoImpl fdi = new FilmDaoImpl();
-		fdi.deleteFilm(film);
 		
+		try {
+			fdi.deleteFilm(film);
+		} catch (Exception e) {
+			System.out.println("该表 关联了其他表 ，存在外键约束 无法删除 ，请您三思,您可以删除 您新添加的数据（点击index，可以看到新增按钮）~~~~~~");
+			request.setAttribute("erro", "MySQLIntegrityConstraintViolationException：该表存在外键约束，无法删除，您可以尝试删除您新添加的数据（点击index，可以看到新增按钮）");
+		}
+			
+			System.out.println("in delete----------------film=="+film);
 		this.toList(request, response);
 	}
 
@@ -126,7 +132,6 @@ public class UserServlet extends HttpServlet {
 	private void toList(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		FilmDaoImpl filmDaoImpl = new FilmDaoImpl();
 		List<Film>  list= filmDaoImpl.findAll();
-		System.out.println("zhaodao suoyou film"+list);
 		request.setAttribute("filmList", list);
 		request.getRequestDispatcher("/crud/list.jsp").forward(request, response);
 	}
@@ -153,14 +158,12 @@ public class UserServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
 	private void userLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String username = request.getParameter("name");
 		Customer customer = new Customer();
 		customer.setFirstName(username);
 		CustomerDaoImpl cdi = new CustomerDaoImpl();
 		Customer customer2 = cdi.queryCustomer(customer);
-		System.out.println("通过用户名找到的用户"+customer2);
 		
 		if(customer2.getCustomerId() == null){
 			PrintWriter pw = response.getWriter();

@@ -9,6 +9,7 @@
 </head>
 <body>
 <center><h2><a href="/Exam-12766-20161219-1/index.jsp">index</a></h2></center>
+<h3><center><p style="color: red">${erro }</p></center></h3>
 <center><h1>list</h1>
 <table border="1">
        <tr>

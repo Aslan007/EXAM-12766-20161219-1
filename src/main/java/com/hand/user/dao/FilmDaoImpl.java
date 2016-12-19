@@ -54,11 +54,11 @@ public class FilmDaoImpl implements FilmDao{
 		FilmDaoImpl fdi = new FilmDaoImpl();
 //		List<Film> list = fdi.findAll();
 //		System.out.println(list);
-		Film film = new Film();
-		film.setDescription("12312312");
-		film.setLanguageId(2);
-		film.setTitle("titles3123");
-		fdi.addFilm(film);
+//		Film film = new Film();
+//		film.setDescription("12312312");
+//		film.setLanguageId(2);
+//		film.setTitle("titles3123");
+//		fdi.addFilm(film);
 	}
 
 	public Film findFilm(Film film) {
@@ -120,37 +120,23 @@ public class FilmDaoImpl implements FilmDao{
 		
 	}
 
-	public void deleteFilm(Film film) {
+	public void deleteFilm(Film film) throws SQLException {
+		//delete from film where film_id =
 		Integer id = film.getFilmId();
-//		delete from film f1,film_actor f2 ,film_text f3 ,film_category f4,inventory f5, where 
-//		f4.film_id = f3.film_id
-//				and f2.film_id=f1.film_id
-//				and f2.film_id =f3.film_id
-//				and f4.film_id= f5.film_id
-//				and f1.film_id =1 
-		String sql ="delete from film_actor f2 ,film_text f3 ,film_category f4,inventory f5, where f4.film_id = f3.film_id and f2.film_id =f3.film_id and f4.film_id= f5.film_id and f2.film_id ="+id+"; delete from film where film_id = "+id;
+		String sql = "DELETE from film where film_id="+id;
+		System.out.println(sql);
+		//异常处理，如不能删除，提示，在 servlet里面处理
 		Connection conn = null;
 		conn = DbUtil.getConnection();
-		 try {
-			Statement stmt = conn.createStatement();
-			stmt.executeUpdate(sql);//执行
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			try {
+				Statement stmt = conn.createStatement();
+				stmt.executeUpdate(sql);
 				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+				
 		
 	}
 
 	public void addFilm(Film film) {
-		//insert into film (film_id,title,description,release_year,language_id,original_language_id,rental_duration,
-		//rental_rate,length,replacement_cost,rating, special_features, last_update)
-		//insert into film (title,description,language_id) values ('123','qweq',2)
 		String title =film.getTitle();
 		String description = film.getDescription();
 		Integer  language_id =  film.getLanguageId();
@@ -162,12 +148,13 @@ public class FilmDaoImpl implements FilmDao{
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(sql);//执行
 			
-		} catch (SQLException e) {
+		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}finally {
 			try {
 				conn.close();
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
