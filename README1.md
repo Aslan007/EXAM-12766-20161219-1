@@ -1,4 +1,4 @@
-# exam-12766-20161219-01
+# exam-12766-20161219-1
 数据库名：jdbc:mysql://localhost:3306/sakila
 数据库用户名：lxtest
 密码：admin
